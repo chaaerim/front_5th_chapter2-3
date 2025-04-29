@@ -51,6 +51,9 @@ importers:
       eslint:
         specifier: ^9.25.1
         version: 9.25.1
+      eslint-plugin-fsd-lint:
+        specifier: ^1.0.9
+        version: 1.0.9(eslint@9.25.1)
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.25.1)
@@ -1304,6 +1307,11 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+
+  eslint-plugin-fsd-lint@1.0.9:
+    resolution: {integrity: sha512-D5Rh40tX9oqD63uD4RfYK6ZfbsMOGEstTC/nbRWmE5S4AK+WB2dibISyw9LQ5BIoP77yew/SmJ7fZ1iIH5IneA==}
+    peerDependencies:
+      eslint: '>=9.0.0'
 
   eslint-plugin-react-hooks@5.2.0:
     resolution: {integrity: sha512-+f15FfK64YQwZdJNELETdn5ibXEUQmW1DZL6KXhNnc2heoy/sg9VJJeT7n8TlMWouzWqSWavFkIhHyIbIAEapg==}
@@ -3177,7 +3185,7 @@ snapshots:
   '@vitest/utils@2.1.3':
     dependencies:
       '@vitest/pretty-format': 2.1.3
-      loupe: 3.1.2
+      loupe: 3.1.3
       tinyrainbow: 1.2.0
 
   '@vitest/utils@3.1.2':
@@ -3394,6 +3402,10 @@ snapshots:
   escalade@3.2.0: {}
 
   escape-string-regexp@4.0.0: {}
+
+  eslint-plugin-fsd-lint@1.0.9(eslint@9.25.1):
+    dependencies:
+      eslint: 9.25.1
 
   eslint-plugin-react-hooks@5.2.0(eslint@9.25.1):
     dependencies:
