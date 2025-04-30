@@ -32,6 +32,7 @@ import { UserModal } from "../features/user/ui/UserModal"
 import { UserCell } from "../features/user/ui/UserCell"
 import { UpdateCommentButton } from "../features/comment/updateComment/ui/UpdateCommentButton"
 import { CreateCommentButton } from "../features/comment/createComment/ui"
+import { CommentList } from "../features/comment/getComment/getComment.ui"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -498,7 +499,7 @@ const PostsManager = () => {
           </DialogHeader>
           <div className="space-y-4">
             <p>{highlightText(selectedPost?.body, searchQuery)}</p>
-            {renderComments(selectedPost?.id)}
+            <CommentList postId={selectedPost?.id} />
           </div>
         </DialogContent>
       </Dialog>

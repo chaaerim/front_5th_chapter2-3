@@ -8,10 +8,11 @@ interface UpdateComment {
 interface UpdateCommentFormProps {
   commentId: number
   commentBody: string
+  close: () => void
 }
 
-export const useUpdateCommentForm = ({ commentId, commentBody }: UpdateCommentFormProps) => {
-  const { updateCommentMutation } = useUpdateCommentQuery()
+export const useUpdateCommentForm = ({ commentId, commentBody, close }: UpdateCommentFormProps) => {
+  const { updateCommentMutation } = useUpdateCommentQuery(close)
 
   const { register, getValues } = useForm<UpdateComment>({
     mode: "onChange",

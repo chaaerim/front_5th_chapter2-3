@@ -10,7 +10,7 @@ interface UpdateCommentFormProps {
 }
 
 export const UpdateCommentForm = ({ isOpen, close, commentId, commentBody }: UpdateCommentFormProps) => {
-  const { register, onSubmit } = useUpdateCommentForm({ commentId, commentBody })
+  const { register, onSubmit } = useUpdateCommentForm({ commentId, commentBody, close })
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
