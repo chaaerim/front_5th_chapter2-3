@@ -26,7 +26,7 @@ import {
   Textarea,
 } from "../shared/ui"
 import { CreatePostForm } from "../features/post/createPost/createPost.ui"
-
+import { overlay } from "overlay-kit"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -476,7 +476,13 @@ const PostsManager = () => {
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>게시물 관리자</span>
-          <Button onClick={() => setShowAddDialog(true)}>
+          <Button
+            onClick={() => {
+              overlay.open(({ isOpen, close }) => {
+                return <CreatePostForm isOpen={isOpen} close={close} />
+              })
+            }}
+          >
             <Plus className="w-4 h-4 mr-2" />
             게시물 추가
           </Button>
@@ -572,7 +578,6 @@ const PostsManager = () => {
       </CardContent>
 
       {/* 게시물 추가 대화상자 */}
-      {/* <CreatePostForm /> */}
 
       {/* 게시물 수정 대화상자 */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>

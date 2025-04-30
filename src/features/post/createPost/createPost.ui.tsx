@@ -1,12 +1,17 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, Input, Textarea, Button } from "../../../shared/ui"
 import { useCreatePostForm } from "./createPost.model"
 
-export const CreatePostForm = () => {
+interface CreatePostFormProps {
+  isOpen: boolean
+  close: () => void
+}
+
+export const CreatePostForm = ({ isOpen, close }: CreatePostFormProps) => {
   // 게시물 추가
   const { register, onSubmit } = useCreatePostForm()
 
   return (
-    <Dialog open={true}>
+    <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>새 게시물 추가</DialogTitle>
