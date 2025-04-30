@@ -1,9 +1,9 @@
 import { CreateCommentButton } from "../createComment/ui"
 import { useGetCommentsQuery } from "./getComment.api"
-import { Comment } from "../../../entities/comment/getComment/getComment.model"
 import { Button } from "../../../shared/ui"
 import { ThumbsUp, Trash2 } from "lucide-react"
 import { UpdateCommentButton } from "../updateComment/ui/UpdateCommentButton"
+import { DeleteCommentButton } from "../deleteComment/deleteComment.ui"
 interface CommentListProps {
   postId: number
 }
@@ -45,9 +45,7 @@ export const CommentList = ({ postId }: CommentListProps) => {
                 <span className="ml-1 text-xs">{comment.likes}</span>
               </Button>
               <UpdateCommentButton commentId={comment.id} commentBody={comment.body} />
-              {/* <Button variant="ghost" size="sm" onClick={() => deleteComment(comment.id, postId)}>
-                <Trash2 className="w-3 h-3" />
-              </Button> */}
+              <DeleteCommentButton commentId={comment.id} />
             </div>
           </div>
         ))}
