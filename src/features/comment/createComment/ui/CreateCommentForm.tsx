@@ -9,7 +9,7 @@ interface CreateCommentFormProps {
 }
 
 export const CreateCommentForm = ({ isOpen, close, postId, userId }: CreateCommentFormProps) => {
-  const { register, onSubmit } = useCreateCommentForm({ postId, userId })
+  const { register, onSubmit } = useCreateCommentForm({ postId, userId, close })
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>

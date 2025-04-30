@@ -1,4 +1,4 @@
-import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react"
+import { MessageSquare, ThumbsDown, ThumbsUp } from "lucide-react"
 import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/ui"
 import { useGetPostQuery } from "./getPost.api"
 import { DeletePostButton } from "../deletePost/deletePost.ui"

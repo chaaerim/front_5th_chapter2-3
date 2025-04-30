@@ -1,7 +1,7 @@
 import { CreateCommentButton } from "../createComment/ui"
 import { useGetCommentsQuery } from "./getComment.api"
 import { Button } from "../../../shared/ui"
-import { ThumbsUp, Trash2 } from "lucide-react"
+import { ThumbsUp } from "lucide-react"
 import { UpdateCommentButton } from "../updateComment/ui/UpdateCommentButton"
 import { DeleteCommentButton } from "../deleteComment/deleteComment.ui"
 interface CommentListProps {
