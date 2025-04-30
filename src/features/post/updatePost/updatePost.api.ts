@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updatePost } from "../../../entities/post/updatePost"
-import { Post } from "../../../entities/post/model"
+import { Post, PostList } from "../../../entities/post/model"
 
 interface UpdatePostFormProps {
   close: () => void
@@ -11,8 +11,26 @@ export const useUpdatePostQuery = ({ close }: UpdatePostFormProps) => {
 
   const { mutate: updatePostMutation } = useMutation({
     mutationFn: async (post: Post) => await updatePost(post.id, post),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["posts"] })
+    onSuccess: (updatedPost: Post) => {
+      // ["posts"] 캐시를 꺼내서, 해당 id에 맞는 항목만 교체
+      queryClient.setQueryData<PostList>(["posts"], (old) => {
+        if (!old) {
+          return {
+            posts: [updatedPost],
+            total: 1,
+            skip: 0,
+            limit: 10,
+          }
+        }
+
+        return {
+          posts: old.posts.map((p) => (p.id === updatedPost.id ? updatedPost : p)),
+          total: old.total,
+          skip: old.skip,
+          limit: old.limit,
+        }
+      })
+
       close()
     },
     onError: (error) => {

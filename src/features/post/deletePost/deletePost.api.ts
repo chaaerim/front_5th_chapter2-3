@@ -1,13 +1,32 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deletePost } from "../../../entities/post/deletePost/deletePost.api"
+import { DeletePostResponse } from "../../../entities/post/deletePost/deletePost.model"
+import { PostList } from "../../../entities/post/model"
 
 export const useDeletePostQuery = () => {
   const queryClient = useQueryClient()
 
   const { mutate: deletePostMutation } = useMutation({
     mutationFn: async (postId: number) => await deletePost(postId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] })
+    onSuccess: (deleted: DeletePostResponse) => {
+      // ["posts"] 캐시를 꺼내서, 삭제된 ID를 제외한 새 배열과 total-1 로 업데이트
+      queryClient.setQueryData<PostList>(["posts"], (old) => {
+        if (!old) {
+          return {
+            posts: [],
+            total: 0,
+            skip: 0,
+            limit: 10,
+          }
+        }
+
+        return {
+          posts: old.posts.filter((p) => p.id !== deleted.id),
+          total: old.total - 1,
+          skip: old.skip,
+          limit: old.limit,
+        }
+      })
     },
     onError: (error) => {
       console.error(error)
