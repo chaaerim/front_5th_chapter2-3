@@ -19,7 +19,8 @@ export const PostTable = () => {
     )
   }
 
-  const { posts } = useGetPostQuery(limit, skip)
+  const { posts } = useGetPostQuery(0, 0)
+  console.log("posts", posts)
 
   return (
     <Table>
