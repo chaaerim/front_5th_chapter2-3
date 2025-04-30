@@ -1,6 +1,7 @@
 import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react"
 import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/ui"
 import { useGetPostQuery } from "./getPost.api"
+import { DeletePostButton } from "../deletePost/deletePost.ui"
 
 export const PostTable = () => {
   const highlightText = (text: string, highlight: string) => {
@@ -60,12 +61,14 @@ export const PostTable = () => {
               </div>
             </TableCell>
             <TableCell>
+              {/* 작성자 버튼 */}
               <div className="flex items-center space-x-2 cursor-pointer" onClick={() => openUserModal(post.author)}>
                 <img src={post.author?.image} alt={post.author?.username} className="w-8 h-8 rounded-full" />
                 <span>{post.author?.username}</span>
               </div>
             </TableCell>
             <TableCell>
+              {/* 반응 버튼 */}
               <div className="flex items-center gap-2">
                 <ThumbsUp className="w-4 h-4" />
                 <span>{post.reactions?.likes || 0}</span>
@@ -75,9 +78,11 @@ export const PostTable = () => {
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
+                {/* 댓글 버튼 */}
                 <Button variant="ghost" size="sm" onClick={() => openPostDetail(post)}>
                   <MessageSquare className="w-4 h-4" />
                 </Button>
+                {/* 수정 버튼 */}
                 <Button
                   variant="ghost"
                   size="sm"
@@ -88,6 +93,7 @@ export const PostTable = () => {
                 >
                   <Edit2 className="w-4 h-4" />
                 </Button>
+                <DeletePostButton postId={post.id} />
               </div>
             </TableCell>
           </TableRow>

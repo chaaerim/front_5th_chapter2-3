@@ -10,7 +10,7 @@ export const DeletePostButton = ({ postId }: DeletePostButtonProps) => {
   const { deletePostMutation } = useDeletePostQuery()
 
   return (
-    <Button variant="destructive" size="sm" onClick={() => {}}>
+    <Button variant="destructive" size="sm" onClick={() => deletePostMutation(postId)}>
       <Trash2 className="w-4 h-4" />
       삭제
     </Button>
