@@ -1,9 +1,8 @@
 import { CreateCommentButton } from "../createComment/ui"
 import { useGetCommentsQuery } from "./getComment.api"
-import { Button } from "../../../shared/ui"
-import { ThumbsUp } from "lucide-react"
 import { UpdateCommentButton } from "../updateComment/ui/UpdateCommentButton"
 import { DeleteCommentButton } from "../deleteComment/deleteComment.ui"
+import { LikeCommentButton } from "../likeComment/likeComment.ui"
 interface CommentListProps {
   postId: number
 }
@@ -40,10 +39,7 @@ export const CommentList = ({ postId }: CommentListProps) => {
               <span className="truncate">{highlightText(comment.body, "")}</span>
             </div>
             <div className="flex items-center space-x-1">
-              <Button variant="ghost" size="sm">
-                <ThumbsUp className="w-3 h-3" />
-                <span className="ml-1 text-xs">{comment.likes}</span>
-              </Button>
+              <LikeCommentButton commentId={comment.id} likes={comment.likes} />
               <UpdateCommentButton commentId={comment.id} commentBody={comment.body} />
               <DeleteCommentButton commentId={comment.id} />
             </div>
