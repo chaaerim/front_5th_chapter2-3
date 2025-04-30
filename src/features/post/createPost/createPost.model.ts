@@ -14,7 +14,6 @@ export const useCreatePostForm = () => {
   })
 
   const onSubmit = () => {
-    console.log(getValues())
     createPostMutation(getValues())
   }
 
