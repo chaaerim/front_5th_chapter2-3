@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, Textarea, Button } from "../../../shared/ui"
-import { useCreateCommentForm } from "./createComment.model"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, Textarea, Button } from "../../../../shared/ui"
+import { useCreateCommentForm } from "../createComment.model"
 
 interface CreateCommentFormProps {
   isOpen: boolean
