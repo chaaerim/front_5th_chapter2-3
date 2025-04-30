@@ -5,7 +5,7 @@ export const useDeletePostQuery = () => {
   const queryClient = useQueryClient()
 
   const { mutate: deletePostMutation } = useMutation({
-    mutationFn: async (id: number) => await deletePost(id),
+    mutationFn: async (postId: number) => await deletePost(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] })
     },
