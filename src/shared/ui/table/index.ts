@@ -1,0 +1,6 @@
+export * from "./table.ui"
+export * from "./tableBody.ui"
+export * from "./tableCell.ui"
+export * from "./tableHead.ui"
+export * from "./tableHeader.ui"
+export * from "./tableRow.ui"
