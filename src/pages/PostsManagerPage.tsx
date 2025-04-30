@@ -29,6 +29,7 @@ import { CreatePostForm } from "../features/post/createPost/createPost.ui"
 import { overlay } from "overlay-kit"
 import { UpdatePostForm } from "../features/post/updatePost/ui/UpdatePostForm"
 import { UserModal } from "../features/user/ui/UserModal"
+import { UserCell } from "../features/user/ui/UserCell"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -157,39 +158,6 @@ const PostsManager = () => {
     setLoading(false)
   }
 
-  // 게시물 추가
-  const addPost = async () => {
-    try {
-      const response = await fetch("/api/posts/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPost),
-      })
-      const data = await response.json()
-      setPosts([data, ...posts])
-      setShowAddDialog(false)
-      setNewPost({ title: "", body: "", userId: 1 })
-    } catch (error) {
-      console.error("게시물 추가 오류:", error)
-    }
-  }
-
-  // 게시물 업데이트
-  const updatePost = async () => {
-    try {
-      const response = await fetch(`/api/posts/${selectedPost.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selectedPost),
-      })
-      const data = await response.json()
-      setPosts(posts.map((post) => (post.id === data.id ? data : post)))
-      setShowEditDialog(false)
-    } catch (error) {
-      console.error("게시물 업데이트 오류:", error)
-    }
-  }
-
   // 게시물 삭제
   const deletePost = async (id) => {
     try {
@@ -295,18 +263,6 @@ const PostsManager = () => {
     setShowPostDetailDialog(true)
   }
 
-  // 사용자 모달 열기
-  const openUserModal = async (user) => {
-    try {
-      const response = await fetch(`/api/users/${user.id}`)
-      const userData = await response.json()
-      setSelectedUser(userData)
-      setShowUserModal(true)
-    } catch (error) {
-      console.error("사용자 정보 가져오기 오류:", error)
-    }
-  }
-
   useEffect(() => {
     fetchTags()
   }, [])
@@ -386,17 +342,7 @@ const PostsManager = () => {
               </div>
             </TableCell>
             <TableCell>
-              <div
-                className="flex items-center space-x-2 cursor-pointer"
-                onClick={() => {
-                  overlay.open(({ isOpen, close }) => {
-                    return <UserModal isOpen={isOpen} close={close} userId={post.author?.id} />
-                  })
-                }}
-              >
-                <img src={post.author?.image} alt={post.author?.username} className="w-8 h-8 rounded-full" />
-                <span>{post.author?.username}</span>
-              </div>
+              <UserCell userId={post.author?.id} />
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">

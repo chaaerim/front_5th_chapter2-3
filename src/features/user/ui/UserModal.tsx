@@ -9,7 +9,7 @@ interface UserModalProps {
 
 export const UserModal = ({ isOpen, close, userId }: UserModalProps) => {
   const { user } = useGetUserQuery({ userId })
-  console.log(isOpen, userId, user)
+  console.log(isOpen)
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
@@ -33,7 +33,9 @@ export const UserModal = ({ isOpen, close, userId }: UserModalProps) => {
             <p>
               <strong>전화번호:</strong> {user.phone}
             </p>
-            <p>{/* <strong>주소:</strong> {user.address.address}, {user.address.city}, {user.address.state} */}</p>
+            <p>
+              <strong>주소:</strong> {user.address.address}, {user.address.city}, {user.address.state}
+            </p>
             <p>
               <strong>직장:</strong> {user.company.name} - {user.company.title}
             </p>
