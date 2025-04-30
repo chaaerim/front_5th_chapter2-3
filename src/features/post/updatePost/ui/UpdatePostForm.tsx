@@ -9,7 +9,7 @@ interface UpdatePostFormProps {
 }
 
 export const UpdatePostForm = ({ isOpen, close, selectedPost }: UpdatePostFormProps) => {
-  const { register, onSubmit } = useUpdatePostForm({ selectedPost })
+  const { register, onSubmit } = useUpdatePostForm({ selectedPost, close })
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
@@ -20,7 +20,14 @@ export const UpdatePostForm = ({ isOpen, close, selectedPost }: UpdatePostFormPr
         <div className="space-y-4">
           <Input placeholder="제목" {...register("title")} />
           <Textarea rows={15} placeholder="내용" value={selectedPost?.body || ""} {...register("body")} />
-          <Button onClick={onSubmit}>게시물 업데이트</Button>
+          <Button
+            onClick={() => {
+              onSubmit()
+              close()
+            }}
+          >
+            게시물 업데이트
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

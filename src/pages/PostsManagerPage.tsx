@@ -27,6 +27,7 @@ import {
 } from "../shared/ui"
 import { CreatePostForm } from "../features/post/createPost/createPost.ui"
 import { overlay } from "overlay-kit"
+import { UpdatePostForm } from "../features/post/updatePost/ui/UpdatePostForm"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -406,8 +407,9 @@ const PostsManager = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => {
-                    setSelectedPost(post)
-                    setShowEditDialog(true)
+                    overlay.open(({ isOpen, close }) => {
+                      return <UpdatePostForm isOpen={isOpen} close={close} selectedPost={post} />
+                    })
                   }}
                 >
                   <Edit2 className="w-4 h-4" />
@@ -580,28 +582,6 @@ const PostsManager = () => {
       {/* 게시물 추가 대화상자 */}
 
       {/* 게시물 수정 대화상자 */}
-
-      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>게시물 수정</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <Input
-              placeholder="제목"
-              value={selectedPost?.title || ""}
-              onChange={(e) => setSelectedPost({ ...selectedPost, title: e.target.value })}
-            />
-            <Textarea
-              rows={15}
-              placeholder="내용"
-              value={selectedPost?.body || ""}
-              onChange={(e) => setSelectedPost({ ...selectedPost, body: e.target.value })}
-            />
-            <Button onClick={updatePost}>게시물 업데이트</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       {/* 댓글 추가 대화상자 */}
       <Dialog open={showAddCommentDialog} onOpenChange={setShowAddCommentDialog}>

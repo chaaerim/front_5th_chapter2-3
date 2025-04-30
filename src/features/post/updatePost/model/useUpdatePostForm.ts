@@ -9,10 +9,11 @@ interface UpdatedPost {
 
 interface UpdatePostFormProps {
   selectedPost: Post
+  close: () => void
 }
 
-export const useUpdatePostForm = ({ selectedPost }: UpdatePostFormProps) => {
-  const { updatePostMutation } = useUpdatePostQuery()
+export const useUpdatePostForm = ({ selectedPost, close }: UpdatePostFormProps) => {
+  const { updatePostMutation } = useUpdatePostQuery({ close })
 
   const { register, getValues } = useForm<UpdatedPost>({
     mode: "onChange",
