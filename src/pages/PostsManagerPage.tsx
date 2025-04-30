@@ -25,6 +25,7 @@ import {
   TableRow,
   Textarea,
 } from "../shared/ui"
+import { CreatePostForm } from "../features/post/createPost/createPost.ui"
 
 const PostsManager = () => {
   const navigate = useNavigate()
@@ -152,6 +153,23 @@ const PostsManager = () => {
       console.error("태그별 게시물 가져오기 오류:", error)
     }
     setLoading(false)
+  }
+
+  // 게시물 추가
+  const addPost = async () => {
+    try {
+      const response = await fetch("/api/posts/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
+      })
+      const data = await response.json()
+      setPosts([data, ...posts])
+      setShowAddDialog(false)
+      setNewPost({ title: "", body: "", userId: 1 })
+    } catch (error) {
+      console.error("게시물 추가 오류:", error)
+    }
   }
 
   // 게시물 업데이트
@@ -554,6 +572,7 @@ const PostsManager = () => {
       </CardContent>
 
       {/* 게시물 추가 대화상자 */}
+      <CreatePostForm />
 
       {/* 게시물 수정 대화상자 */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
