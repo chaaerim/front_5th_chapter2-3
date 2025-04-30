@@ -30,6 +30,8 @@ import { overlay } from "overlay-kit"
 import { UpdatePostForm } from "../features/post/updatePost/ui/UpdatePostForm"
 import { UserModal } from "../features/user/ui/UserModal"
 import { UserCell } from "../features/user/ui/UserCell"
+import { UpdateCommentButton } from "../features/comment/updateComment/ui/UpdateCommentButton"
+import { CreateCommentButton } from "../features/comment/createComment/ui"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -384,16 +386,7 @@ const PostsManager = () => {
     <div className="mt-2">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-sm font-semibold">댓글</h3>
-        <Button
-          size="sm"
-          onClick={() => {
-            setNewComment((prev) => ({ ...prev, postId }))
-            setShowAddCommentDialog(true)
-          }}
-        >
-          <Plus className="w-3 h-3 mr-1" />
-          댓글 추가
-        </Button>
+        <CreateCommentButton postId={postId} userId={1} />
       </div>
       <div className="space-y-1">
         {comments[postId]?.map((comment) => (
@@ -407,16 +400,7 @@ const PostsManager = () => {
                 <ThumbsUp className="w-3 h-3" />
                 <span className="ml-1 text-xs">{comment.likes}</span>
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setSelectedComment(comment)
-                  setShowEditCommentDialog(true)
-                }}
-              >
-                <Edit2 className="w-3 h-3" />
-              </Button>
+              <UpdateCommentButton commentId={comment.id} commentBody={comment.body} />
               <Button variant="ghost" size="sm" onClick={() => deleteComment(comment.id, postId)}>
                 <Trash2 className="w-3 h-3" />
               </Button>
@@ -555,21 +539,6 @@ const PostsManager = () => {
       </Dialog>
 
       {/* 댓글 수정 대화상자 */}
-      <Dialog open={showEditCommentDialog} onOpenChange={setShowEditCommentDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>댓글 수정</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <Textarea
-              placeholder="댓글 내용"
-              value={selectedComment?.body || ""}
-              onChange={(e) => setSelectedComment({ ...selectedComment, body: e.target.value })}
-            />
-            <Button onClick={updateComment}>댓글 업데이트</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       {/* 게시물 상세 보기 대화상자 */}
       <Dialog open={showPostDetailDialog} onOpenChange={setShowPostDetailDialog}>
