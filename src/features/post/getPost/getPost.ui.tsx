@@ -2,6 +2,7 @@ import { Edit2, MessageSquare, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react
 import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/ui"
 import { useGetPostQuery } from "./getPost.api"
 import { DeletePostButton } from "../deletePost/deletePost.ui"
+import { UpdatePostButton } from "../updatePost/ui/UpdatePostButton"
 
 export const PostTable = () => {
   const highlightText = (text: string, highlight: string) => {
@@ -83,16 +84,7 @@ export const PostTable = () => {
                   <MessageSquare className="w-4 h-4" />
                 </Button>
                 {/* 수정 버튼 */}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setSelectedPost(post)
-                    setShowEditDialog(true)
-                  }}
-                >
-                  <Edit2 className="w-4 h-4" />
-                </Button>
+                <UpdatePostButton selectedPost={post} />
                 <DeletePostButton postId={post.id} />
               </div>
             </TableCell>

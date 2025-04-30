@@ -1,4 +1,4 @@
-export interface PostResponse {
+export interface PostList {
   posts: Post[]
   total: number
   skip: number
