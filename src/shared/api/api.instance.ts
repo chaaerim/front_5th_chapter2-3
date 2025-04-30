@@ -17,3 +17,5 @@ export interface HttpClient extends AxiosInstance {
 }
 
 export const http: HttpClient = axiosInstance
+
+http.interceptors.response.use((response) => response.data)

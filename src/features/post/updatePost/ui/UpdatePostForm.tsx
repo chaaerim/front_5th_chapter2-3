@@ -9,6 +9,8 @@ interface UpdatePostFormProps {
 }
 
 export const UpdatePostForm = ({ isOpen, close, selectedPost }: UpdatePostFormProps) => {
+  console.log(isOpen)
+
   const { register, onSubmit } = useUpdatePostForm({ selectedPost, close })
 
   return (

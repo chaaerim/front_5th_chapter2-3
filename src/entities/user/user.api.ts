@@ -6,7 +6,7 @@ export const getUsers = async () => {
   return response
 }
 
-export const getUser = async (id: string) => {
+export const getUser = async (id: number) => {
   const response = await http.get<UserDetail>(`/api/users/${id}`)
   return response
 }
