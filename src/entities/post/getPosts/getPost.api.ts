@@ -6,13 +6,13 @@ export const getPosts = async (limit: number, skip: number) => {
 
   searchParams.set("limit", limit.toString())
   searchParams.set("skip", skip.toString())
-  return await http.get<PostListResponse>(`/api/posts?${searchParams.toString()}`)
+  return await http.get<PostListResponse>(`/posts?${searchParams.toString()}`)
 }
 
 export const getPostsByTag = async (tag: string) => {
-  return await http.get<PostListResponse>(`/api/posts/tag/${tag}`)
+  return await http.get<PostListResponse>(`/posts/tag/${tag}`)
 }
 
 export const getPostsBySearch = async (search: string) => {
-  return await http.get<PostListResponse>(`/api/posts/search?q=${search}`)
+  return await http.get<PostListResponse>(`/posts/search?q=${search}`)
 }

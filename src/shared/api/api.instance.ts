@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 const axiosInstance = axios.create({
-  baseURL: "/",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
   headers: {
     "content-type": "application/json; charset=utf-8",
