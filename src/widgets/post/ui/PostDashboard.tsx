@@ -5,6 +5,7 @@ import { useSearchBarForm } from "../../../features/search/model/useSearchBarFor
 import { SearchBar } from "../../../features/search/ui/SearchBar"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../shared/ui"
 import { Suspense } from "react"
+import { Loader2 } from "lucide-react"
 export const PostDashboard = () => {
   const method = useSearchBarForm()
 
@@ -19,7 +20,13 @@ export const PostDashboard = () => {
       <CardContent>
         <FormProvider {...method}>
           <SearchBar />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="flex justify-center p-4">
+                <Loader2 className="w-10 h-10 animate-spin" />
+              </div>
+            }
+          >
             <PostTable />
           </Suspense>
         </FormProvider>

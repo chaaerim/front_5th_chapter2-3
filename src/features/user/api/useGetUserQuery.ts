@@ -7,14 +7,10 @@ interface UseGetUserQueryProps {
 }
 
 export const useGetUserQuery = ({ userId }: UseGetUserQueryProps) => {
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useSuspenseQuery({
+  const { data: user, error } = useSuspenseQuery({
     queryKey: QUERY_KEYS.GET_USER(userId),
     queryFn: () => getUser(userId),
   })
 
-  return { user, isLoading, error }
+  return { user, error }
 }
