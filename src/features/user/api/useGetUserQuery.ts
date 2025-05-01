@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { getUser } from "../../../entities/user"
+import { QUERY_KEYS } from "../config/queryKeys"
 
 interface UseGetUserQueryProps {
   userId: number
@@ -11,7 +12,7 @@ export const useGetUserQuery = ({ userId }: UseGetUserQueryProps) => {
     isLoading,
     error,
   } = useSuspenseQuery({
-    queryKey: ["users", userId],
+    queryKey: QUERY_KEYS.GET_USER(userId),
     queryFn: () => getUser(userId),
   })
 
