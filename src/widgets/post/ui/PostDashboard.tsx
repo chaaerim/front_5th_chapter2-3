@@ -5,7 +5,6 @@ import { useSearchBarForm } from "../../../features/search/model/useSearchBarFor
 import { SearchBar } from "../../../features/search/ui/SearchBar"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../shared/ui"
 import { Suspense } from "react"
-import { Loader2 } from "lucide-react"
 
 export const PostDashboard = () => {
   const method = useSearchBarForm()
