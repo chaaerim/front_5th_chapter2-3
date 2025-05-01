@@ -3,25 +3,15 @@ import { useGetCommentsQuery } from "./getComment.api"
 import { UpdateCommentButton } from "../updateComment/ui/UpdateCommentButton"
 import { DeleteCommentButton } from "../deleteComment/deleteComment.ui"
 import { LikeCommentButton } from "../likeComment/likeComment.ui"
+import { HighlightText } from "../../../shared/ui"
+
 interface CommentListProps {
   postId: number
+  searchQuery: string
 }
 
-export const CommentList = ({ postId }: CommentListProps) => {
+export const CommentList = ({ postId, searchQuery }: CommentListProps) => {
   const { comments } = useGetCommentsQuery(postId)
-  const highlightText = (text: string, highlight: string) => {
-    if (!text) return null
-    if (!highlight.trim()) {
-      return <span>{text}</span>
-    }
-    const regex = new RegExp(`(${highlight})`, "gi")
-    const parts = text.split(regex)
-    return (
-      <span>
-        {parts.map((part, i) => (regex.test(part) ? <mark key={i}>{part}</mark> : <span key={i}>{part}</span>))}
-      </span>
-    )
-  }
 
   console.log(comments.comments[0].body)
 
@@ -36,7 +26,9 @@ export const CommentList = ({ postId }: CommentListProps) => {
           <div key={comment.id} className="flex items-center justify-between text-sm border-b pb-1">
             <div className="flex items-center space-x-2 overflow-hidden">
               <span className="font-medium truncate">{comment.user.username}:</span>
-              <span className="truncate">{highlightText(comment.body, "")}</span>
+              <span className="truncate">
+                <HighlightText text={comment.body} highlight={searchQuery} />
+              </span>
             </div>
             <div className="flex items-center space-x-1">
               <LikeCommentButton commentId={comment.id} likes={comment.likes} />

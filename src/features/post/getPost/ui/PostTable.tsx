@@ -1,5 +1,5 @@
 import { ThumbsDown, ThumbsUp } from "lucide-react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../shared/ui"
+import { HighlightText, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../shared/ui"
 import { useGetPostQuery } from "../getPost.api"
 import { DeletePostButton } from "../../../post/deletePost/deletePost.ui"
 import { UpdatePostButton } from "../../../post/updatePost/ui/UpdatePostButton"
@@ -12,20 +12,6 @@ export const PostTable = () => {
   const { watch } = useFormContext<SearchBarForm>()
 
   const searchQuery = watch("title")
-
-  const highlightText = (text: string, highlight: string) => {
-    if (!text) return null
-    if (!highlight.trim()) {
-      return <span>{text}</span>
-    }
-    const regex = new RegExp(`(${highlight})`, "gi")
-    const parts = text.split(regex)
-    return (
-      <span>
-        {parts.map((part, i) => (regex.test(part) ? <mark key={i}>{part}</mark> : <span key={i}>{part}</span>))}
-      </span>
-    )
-  }
 
   const { posts } = useGetPostQuery(0, 0)
   console.log("posts", posts)
@@ -48,7 +34,9 @@ export const PostTable = () => {
             {/* tag 관련된 cell */}
             <TableCell>
               <div className="space-y-1">
-                <div>{highlightText(post.title, searchQuery)}</div>
+                <div>
+                  <HighlightText text={post.title} highlight={searchQuery} />
+                </div>
 
                 {/* <div className="flex flex-wrap gap-1">
                   {post.tags?.map((tag) => (
@@ -85,7 +73,7 @@ export const PostTable = () => {
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
-                <GetPostDetailButton post={post} />
+                <GetPostDetailButton post={post} searchQuery={searchQuery} />
                 <UpdatePostButton selectedPost={post} />
                 <DeletePostButton postId={post.id} />
               </div>
