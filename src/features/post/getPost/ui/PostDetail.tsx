@@ -1,9 +1,6 @@
-import { useFormContext } from "react-hook-form"
 import { Post } from "../../../../entities/post/model"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, HighlightText } from "../../../../shared/ui"
 import { CommentList } from "../../../comment/getComment/getComment.ui"
-import { SearchBarForm } from "../../../search/model/useSearchBarForm"
-
 interface PostDetailProps {
   isOpen: boolean
   close: () => void

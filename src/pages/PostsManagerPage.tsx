@@ -1,36 +1,11 @@
 import { Suspense, useEffect, useState } from "react"
 import { Edit2, MessageSquare, Plus, Search, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../shared/ui"
-import { CreatePostForm } from "../features/post/createPost/createPost.ui"
+import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../shared/ui"
 import { overlay } from "overlay-kit"
 import { UpdatePostForm } from "../features/post/updatePost/ui/UpdatePostForm"
 import { UserCell } from "../features/user/ui/UserCell"
 
-import { CommentList } from "../features/comment/getComment/getComment.ui"
-import { CreatePostFormButton } from "../features/post/createPost/ui/CreatePostFormButton"
 import { PostDashboard } from "../widgets/post/ui/PostDashboard"
 const PostsManager = () => {
   const navigate = useNavigate()

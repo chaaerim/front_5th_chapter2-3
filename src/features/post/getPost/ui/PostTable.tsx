@@ -14,7 +14,7 @@ export const PostTable = () => {
 
   const searchQuery = watch("title")
 
-  const { posts } = useGetPostQuery(0, 0)
+  const { posts } = useGetPostQuery()
   console.log("posts", posts)
 
   return (
@@ -62,7 +62,7 @@ export const PostTable = () => {
               </TableCell>
               <TableCell>
                 {/* 작성자 버튼 */}
-                <UserCell userId={post.author?.id} />
+                <UserCell userId={post.userId} />
               </TableCell>
               <TableCell>
                 {/* 반응 버튼 */}

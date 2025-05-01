@@ -5,6 +5,8 @@ interface PaginationProps {
   total: number
 }
 
+const LIMIT_OPTIONS = [10, 20, 30]
+
 export const Pagination = ({ total }: PaginationProps) => {
   const { skip, limit, setSkip, setLimit } = usePagination()
 
@@ -17,9 +19,11 @@ export const Pagination = ({ total }: PaginationProps) => {
             <SelectValue placeholder="10" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="10">10</SelectItem>
-            <SelectItem value="20">20</SelectItem>
-            <SelectItem value="30">30</SelectItem>
+            {LIMIT_OPTIONS.map((option) => (
+              <SelectItem key={option} value={option.toString()}>
+                {option}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         <span>항목</span>
