@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../shared/ui"
-import { useGetTagQuery } from "../api/useGetTagQuery"
-import { SearchBarForm } from "../model/useSearchBarForm"
-import { useSearch } from "../model/useSearch"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/ui"
+import { useGetTagQuery } from "@features/search/api/useGetTagQuery"
+import { SearchBarForm } from "@features/search/model/useSearchBarForm"
+import { useSearch } from "@features/search/model/useSearch"
 
 export const TagSelector = () => {
   const { tags } = useGetTagQuery()

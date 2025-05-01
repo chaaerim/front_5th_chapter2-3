@@ -1,7 +1,7 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../shared/ui"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/ui"
 import { useFormContext } from "react-hook-form"
-import { SearchBarForm } from "../model/useSearchBarForm"
-import { useSearch } from "../model/useSearch"
+import { SearchBarForm } from "@features/search/model/useSearchBarForm"
+import { useSearch } from "@features/search/model/useSearch"
 
 interface SortBy {
   value: "none" | "id" | "title" | "reactions"

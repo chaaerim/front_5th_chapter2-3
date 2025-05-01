@@ -1,11 +1,11 @@
 import { Search } from "lucide-react"
-import { Input } from "../../../shared/ui"
-import { TagSelector } from "./TagSelector"
-import { OrderSelector } from "./OrderSelector"
-import { SortSelector } from "./SortSelector"
+import { Input } from "@shared/ui"
+import { TagSelector } from "@features/search/ui/TagSelector"
+import { OrderSelector } from "@features/search/ui/OrderSelector"
+import { SortSelector } from "@features/search/ui/SortSelector"
 import { useFormContext } from "react-hook-form"
-import { SearchBarForm } from "../model/useSearchBarForm"
-import { useSearch } from "../model/useSearch"
+import { SearchBarForm } from "@features/search/model/useSearchBarForm"
+import { useSearch } from "@features/search/model/useSearch"
 
 export const SearchBar = () => {
   const { register } = useFormContext<SearchBarForm>()

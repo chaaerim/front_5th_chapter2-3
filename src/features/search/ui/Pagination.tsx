@@ -1,5 +1,5 @@
-import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../shared/ui"
-import { usePagination } from "../model/usePagination"
+import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@shared/ui"
+import { usePagination } from "@features/search/model/usePagination"
 
 interface PaginationProps {
   total: number
