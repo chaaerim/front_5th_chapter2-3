@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../../../shared/ui"
-import { useGetUserQuery } from "../model/useGetUserQuery"
+import { useGetUserQuery } from "../api/useGetUserQuery"
 
 interface UserModalProps {
   isOpen: boolean

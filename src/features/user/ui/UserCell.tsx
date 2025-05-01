@@ -1,6 +1,6 @@
 import { overlay } from "overlay-kit"
 import { UserModal } from "./UserModal"
-import { useGetUsersQuery } from "../model/useGetUsersQuery"
+import { useGetUsersQuery } from "../api/useGetUsersQuery"
 
 interface UserCellProps {
   userId: number
