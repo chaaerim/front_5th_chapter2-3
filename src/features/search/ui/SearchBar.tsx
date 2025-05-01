@@ -5,9 +5,17 @@ import { OrderSelector } from "./OrderSelector"
 import { SortSelector } from "./SortSelector"
 import { useFormContext } from "react-hook-form"
 import { SearchBarForm } from "../model/useSearchBarForm"
+import { useSearch } from "../model/useSearch"
 
 export const SearchBar = () => {
   const { register } = useFormContext<SearchBarForm>()
+  const { setTitle } = useSearch()
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setTitle(e.currentTarget.value)
+    }
+  }
 
   return (
     <div className="flex gap-4">
@@ -18,9 +26,7 @@ export const SearchBar = () => {
             placeholder="게시물 검색..."
             className="pl-8"
             {...register("title")}
-            // value={searchQuery}
-            // onChange={(e) => setSearchQuery(e.target.value)}
-            // onKeyPress={(e) => e.key === "Enter" && searchPosts()}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
         </div>
       </div>
