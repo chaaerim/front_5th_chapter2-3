@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getUser } from "../../../entities/user"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { getUser } from "@entities/user"
+import { QUERY_KEYS } from "@features/user/config/queryKeys"
 
 interface UseGetUserQueryProps {
   userId: number

@@ -1,5 +1,5 @@
-import { http } from "../../shared/api"
-import { UserDetail, UserList } from "./user.model"
+import { http } from "@shared/api"
+import { UserDetail, UserList } from "@entities/user/user.model"
 
 export const getUsers = async () => {
   const response = await http.get<UserList>("/api/users?limit=0&select=username,image")

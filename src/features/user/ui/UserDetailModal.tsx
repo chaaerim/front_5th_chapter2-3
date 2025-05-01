@@ -1,15 +1,14 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../../../shared/ui"
-import { useGetUserQuery } from "../api/useGetUserQuery"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@shared/ui"
+import { useGetUserQuery } from "@features/user/api/useGetUserQuery"
 
-interface UserModalProps {
+interface UserDetailModalProps {
   isOpen: boolean
   close: () => void
   userId: number
 }
 
-export const UserModal = ({ isOpen, close, userId }: UserModalProps) => {
+export const UserDetailModal = ({ isOpen, close, userId }: UserDetailModalProps) => {
   const { user } = useGetUserQuery({ userId })
-  console.log(isOpen)
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>

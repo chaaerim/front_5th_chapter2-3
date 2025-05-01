@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getUsers } from "../../../entities/user"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { getUsers } from "@entities/user"
+import { QUERY_KEYS } from "@features/user/config/queryKeys"
 
 export const useGetUsersQuery = () => {
   const {

@@ -1,6 +1,6 @@
 import { overlay } from "overlay-kit"
-import { UserModal } from "./UserModal"
-import { useGetUsersQuery } from "../api/useGetUsersQuery"
+import { UserDetailModal } from "@features/user/ui/UserDetailModal"
+import { useGetUsersQuery } from "@features/user/api/useGetUsersQuery"
 
 interface UserCellProps {
   userId: number
@@ -14,7 +14,7 @@ export const UserCell = ({ userId }: UserCellProps) => {
       className="flex items-center space-x-2 cursor-pointer"
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <UserModal isOpen={isOpen} close={close} userId={userId} />
+          return <UserDetailModal isOpen={isOpen} close={close} userId={userId} />
         })
       }}
     >
