@@ -1,4 +1,4 @@
-import { http } from "../../../shared/api"
+import { http } from "@shared/api"
 import { CreateCommentRequest } from "./createComment.model"
 import { CommentResponse } from "../../comment/model/commentResponse"
 

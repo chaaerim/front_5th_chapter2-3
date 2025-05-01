@@ -1,4 +1,4 @@
-import { http } from "../../../shared/api"
+import { http } from "@shared/api"
 import { CommentListResponse } from "./getComment.model"
 
 export const getComments = async (postId: number): Promise<CommentListResponse> => {
