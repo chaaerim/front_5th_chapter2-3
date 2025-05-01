@@ -1,6 +1,6 @@
-import { Button } from "../../../../shared/ui"
+import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { UpdateCommentForm } from "./UpdateCommentForm"
+import { UpdateCommentForm } from "@features/comment/updateComment/ui/UpdateCommentForm"
 import { Edit2 } from "lucide-react"
 
 interface UpdateCommentButtonProps {

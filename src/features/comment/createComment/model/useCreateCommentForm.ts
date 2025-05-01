@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { useCreateCommentQuery } from "./createComment.api"
+import { useCreateCommentQuery } from "../api/useCreateCommentQuery"
 
 interface CreateCommentFormProps {
   postId: number

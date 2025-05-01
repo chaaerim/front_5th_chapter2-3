@@ -1,7 +1,7 @@
 import { overlay } from "overlay-kit"
-import { Button } from "../../../../shared/ui"
-import { CreateCommentForm } from "./CreateCommentForm"
+import { CreateCommentForm } from "@features/comment/createComment/ui/CreateCommentForm"
 import { Plus } from "lucide-react"
+import { Button } from "@shared/ui"
 
 interface CreateCommentButtonProps {
   postId: number

@@ -1,6 +1,6 @@
-import { Button } from "../../../shared/ui"
+import { Button } from "@shared/ui"
 import { ThumbsUp } from "lucide-react"
-import { useLikeCommentQuery } from "./likeComment.api"
+import { useLikeCommentQuery } from "@features/comment/likeComment/api/useLikeCommentQuery"
 
 interface LikeCommentButtonProps {
   commentId: number

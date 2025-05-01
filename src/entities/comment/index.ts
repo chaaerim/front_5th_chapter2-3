@@ -1,0 +1,6 @@
+export * from "./createComment"
+export * from "./deleteComment"
+export * from "./getComment"
+export * from "./likeComment"
+export * from "./model"
+export * from "./updateComment"

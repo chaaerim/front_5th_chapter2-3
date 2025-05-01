@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { updateComment } from "../../../entities/comment/updateComment/updateComment.api"
-import { CommentList } from "../../../entities/comment/getComment/getComment.model"
-import { CommentResponse } from "../../../entities/comment/model/commentResponse"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { updateComment, CommentResponse, CommentListResponse } from "@entities/comment"
+import { QUERY_KEYS } from "@features/comment/config/queryKeys"
 
 interface UpdateComment {
   id: number
@@ -19,7 +17,7 @@ export const useUpdateCommentQuery = (close: () => void) => {
 
       const updatedComment = { ...updated, likes: 0 }
 
-      queryClient.setQueryData<CommentList>(key, (old) => {
+      queryClient.setQueryData<CommentListResponse>(key, (old) => {
         if (!old) {
           // 캐시가 비어있으면 기본값을 채워서 반환
           return {

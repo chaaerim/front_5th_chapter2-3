@@ -1,10 +1,6 @@
 import { http } from "../../../shared/api"
 import { CommentResponse } from "../model/commentResponse"
-interface UpdateComment {
-  id: number
-  body: string
-}
-
-export const updateComment = async ({ id, body }: UpdateComment): Promise<CommentResponse> => {
+import { UpdateCommentRequest } from "./updateComment.model"
+export const updateComment = async ({ id, body }: UpdateCommentRequest): Promise<CommentResponse> => {
   return await http.put(`/api/comments/${id}`, { body })
 }

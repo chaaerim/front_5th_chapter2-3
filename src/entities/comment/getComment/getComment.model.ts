@@ -1,4 +1,5 @@
-export interface CommentList {
+import { User } from "../model"
+export interface CommentListResponse {
   comments: Comment[]
   total: number
   skip: number
@@ -11,10 +12,4 @@ export interface Comment {
   postId: number
   likes: number
   user: User
-}
-
-export interface User {
-  id: number
-  username: string
-  fullName: string
 }

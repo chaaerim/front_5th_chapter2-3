@@ -1,6 +1,6 @@
-import { Button } from "../../../shared/ui"
+import { Button } from "@shared/ui"
 import { Trash2 } from "lucide-react"
-import { useDeleteCommentQuery } from "./deleteComment.api"
+import { useDeleteCommentQuery } from "@features/comment/deleteComment/api/useDeleteCommentQuery"
 
 interface DeleteCommentButtonProps {
   commentId: number

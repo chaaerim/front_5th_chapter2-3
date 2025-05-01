@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { useUpdateCommentQuery } from "./updateComment.api"
+import { useUpdateCommentQuery } from "@features/comment/updateComment/api/useUpdateCommentQuery"
 
 interface UpdateComment {
   body: string

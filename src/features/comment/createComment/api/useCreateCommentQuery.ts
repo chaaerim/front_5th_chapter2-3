@@ -1,15 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { CreateComment } from "../../../entities/comment/createComment/createComment.model"
-import { createComment } from "../../../entities/comment/createComment/createComment.api"
-import { CommentResponse } from "../../../entities/comment/model/commentResponse"
-import { CommentList } from "../../../entities/comment/getComment/getComment.model"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { CreateCommentRequest, createComment, CommentResponse, CommentListResponse } from "@entities/comment"
+import { QUERY_KEYS } from "@features/comment/config/queryKeys"
 
 export const useCreateCommentQuery = (close: () => void) => {
   const queryClient = useQueryClient()
 
   const { mutate: createCommentMutation } = useMutation({
-    mutationFn: async (comment: CreateComment) => await createComment(comment),
+    mutationFn: async (comment: CreateCommentRequest) => await createComment(comment),
     onSuccess: (createdComment: CommentResponse) => {
       const key = QUERY_KEYS.GET_COMMENT(createdComment.postId)
 
@@ -18,7 +15,7 @@ export const useCreateCommentQuery = (close: () => void) => {
         likes: 0,
       }
 
-      queryClient.setQueryData<CommentList>(key, (old) => {
+      queryClient.setQueryData<CommentListResponse>(key, (old) => {
         if (!old) {
           // 캐시 비어있으면 기본값 채워서 반환
           return {

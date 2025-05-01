@@ -1,9 +1,9 @@
-import { CreateCommentButton } from "../createComment/ui"
-import { useGetCommentsQuery } from "./getComment.api"
-import { UpdateCommentButton } from "../updateComment/ui/UpdateCommentButton"
-import { DeleteCommentButton } from "../deleteComment/deleteComment.ui"
-import { LikeCommentButton } from "../likeComment/likeComment.ui"
-import { HighlightText } from "../../../shared/ui"
+import { useGetCommentsQuery } from "@features/comment/getComment/api/useGetCommentsQuery"
+import { UpdateCommentButton } from "@features/comment/updateComment/ui/UpdateCommentButton"
+import { DeleteCommentButton } from "@features/comment/deleteComment/ui/DeleteCommentButton"
+import { LikeCommentButton } from "@features/comment/likeComment/ui/LikeCommentButton"
+import { HighlightText } from "@shared/ui"
+import { CreateCommentButton } from "@features/comment/createComment/ui/CreateCommentButton"
 
 interface CommentListProps {
   postId: number
