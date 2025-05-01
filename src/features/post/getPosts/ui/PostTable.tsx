@@ -1,20 +1,19 @@
 import { ThumbsDown, ThumbsUp } from "lucide-react"
-import { HighlightText, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../shared/ui"
-import { useGetPostQuery } from "../getPost.api"
-import { DeletePostButton } from "../../../post/deletePost/deletePost.ui"
-import { UpdatePostButton } from "../../../post/updatePost/ui/UpdatePostButton"
-import { UserCell } from "../../../user/ui/UserCell"
-import { GetPostDetailButton } from "./GetPostDetailButton"
+import { HighlightText, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@shared/ui"
+import { useGetPostsQuery } from "@features/post/getPosts/api/useGetPostsQuery"
+import { DeletePostButton } from "@features/post/deletePost/ui/DeletePostButton"
+import { UpdatePostButton } from "@features/post/updatePost/ui/UpdatePostButton"
+import { UserCell } from "@features/user/ui/UserCell"
+import { GetPostDetailButton } from "@features/post/getPosts/ui/GetPostDetailButton"
 import { useFormContext } from "react-hook-form"
-import { SearchBarForm } from "../../../search/model/useSearchBarForm"
-import { Pagination } from "./Pagination"
-import { PostTag } from "./PostTag"
+import { SearchBarForm, Pagination } from "@features/search"
+import { PostTag } from "@features/post/getPosts/ui/PostTag"
 
 export const PostTable = () => {
   const { watch } = useFormContext<SearchBarForm>()
   const searchQuery = watch("title")
 
-  const { posts } = useGetPostQuery()
+  const { posts } = useGetPostsQuery()
 
   return (
     <>

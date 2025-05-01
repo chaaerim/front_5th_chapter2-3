@@ -1,6 +1,6 @@
-import { Post } from "../../../../entities/post/model"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, Input, Textarea, Button } from "../../../../shared/ui"
-import { useUpdatePostForm } from "../model/useUpdatePostForm"
+import { Post } from "@entities/post"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, Input, Textarea, Button } from "@shared/ui"
+import { useUpdatePostForm } from "@features/post/updatePost/model/useUpdatePostForm"
 
 interface UpdatePostFormProps {
   isOpen: boolean

@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react"
-import { Button } from "../../../shared/ui"
-import { useDeletePostQuery } from "./deletePost.api"
+import { Button } from "@shared/ui"
+import { useDeletePostQuery } from "@features/post/deletePost/api/useDeletePostQuery"
 
 interface DeletePostButtonProps {
   postId: number

@@ -1,8 +1,8 @@
 import { MessageSquare } from "lucide-react"
-import { Button } from "../../../../shared/ui"
-import { PostDetail } from "./PostDetail"
+import { Button } from "@shared/ui"
+import { PostDetail } from "@features/post/getPosts/ui/PostDetail"
 import { overlay } from "overlay-kit"
-import { Post } from "../../../../entities/post/model"
+import { Post } from "@entities/post"
 
 interface GetPostDetailButtonProps {
   post: Post

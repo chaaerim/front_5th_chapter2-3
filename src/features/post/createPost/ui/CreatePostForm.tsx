@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, Input, Textarea, Button } from "../../../../shared/ui"
-import { useCreatePostForm } from "../createPost.model"
+import { useCreatePostForm } from "@features/post/createPost/model/useCreatePostForm"
 
 interface CreatePostFormProps {
   isOpen: boolean

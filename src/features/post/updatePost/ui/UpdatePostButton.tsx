@@ -1,8 +1,8 @@
-import { Button } from "../../../../shared/ui"
+import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { UpdatePostForm } from "./UpdatePostForm"
+import { UpdatePostForm } from "@features/post/updatePost/ui/UpdatePostForm"
 import { Edit2 } from "lucide-react"
-import { Post } from "../../../../entities/post/model"
+import { Post } from "@entities/post"
 
 interface UpdatePostButtonProps {
   selectedPost: Post

@@ -1,10 +1,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getPost, getPostByTag } from "../../../entities/post/getPost"
-import { useSearch } from "../../search/model/useSearch"
-import { usePagination } from "./model/usePagination"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { getPosts, getPostsByTag } from "@entities/post"
+import { useSearch, usePagination } from "@features/search"
+import { QUERY_KEYS } from "@features/post/config/queryKeys"
 
-export const useGetPostQuery = () => {
+export const useGetPostsQuery = () => {
   const { sortBy, sortOrder, tag, title } = useSearch()
   const { limit, skip } = usePagination()
 
@@ -12,9 +11,9 @@ export const useGetPostQuery = () => {
     queryKey: QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder),
     queryFn: async () => {
       if (tag && tag !== "all") {
-        return await getPostByTag(tag)
+        return await getPostsByTag(tag)
       }
-      return await getPost(limit, skip)
+      return await getPosts(limit, skip)
     },
   })
 

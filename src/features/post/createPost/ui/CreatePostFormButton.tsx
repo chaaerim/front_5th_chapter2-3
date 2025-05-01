@@ -1,6 +1,6 @@
-import { Button } from "../../../../shared/ui"
+import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { CreatePostForm } from "./CreatePostForm"
+import { CreatePostForm } from "@features/post/createPost/ui/CreatePostForm"
 import { Plus } from "lucide-react"
 
 export const CreatePostFormButton = () => {

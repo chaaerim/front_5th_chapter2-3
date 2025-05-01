@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createPost, CreatePostResponse, NewPost } from "../../../entities/post/createPost"
-import { PostList } from "../../../entities/post/model"
-import { useSearch } from "../../search/model/useSearch"
-import { usePagination } from "../getPost/model/usePagination"
-import { QUERY_KEYS } from "../config/queryKeys"
+import { createPost, CreatePostResponse, NewPost, PostListResponse } from "@entities/post"
+import { useSearch, usePagination } from "@features/search"
+import { QUERY_KEYS } from "@features/post/config/queryKeys"
 
 export const useCreatePostQuery = (close: () => void) => {
   const queryClient = useQueryClient()
@@ -23,22 +21,25 @@ export const useCreatePostQuery = (close: () => void) => {
         tags: [],
       }
       // 기존 ["posts"] 캐시를 꺼내서, 새로운 Post를 맨 앞에 추가하고 total을 +1
-      queryClient.setQueryData<PostList>(QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder), (old) => {
-        if (!old) {
-          return {
-            posts: [newPost],
-            total: 1,
-            skip: 0,
-            limit: 10,
+      queryClient.setQueryData<PostListResponse>(
+        QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder),
+        (old) => {
+          if (!old) {
+            return {
+              posts: [newPost],
+              total: 1,
+              skip: 0,
+              limit: 10,
+            }
           }
-        }
-        return {
-          posts: [newPost, ...old.posts],
-          total: old.total + 1,
-          skip: old.skip,
-          limit: old.limit,
-        }
-      })
+          return {
+            posts: [newPost, ...old.posts],
+            total: old.total + 1,
+            skip: old.skip,
+            limit: old.limit,
+          }
+        },
+      )
       close()
     },
     onError: (error) => {

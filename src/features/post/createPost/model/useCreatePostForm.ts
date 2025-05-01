@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
-import { NewPost } from "../../../entities/post/createPost"
-import { useCreatePostQuery } from "./createPost.api"
+import { NewPost } from "@entities/post"
+import { useCreatePostQuery } from "@features/post/createPost/api/useCreatePostQuery"
 
 interface CreatePostFormProps {
   close: () => void

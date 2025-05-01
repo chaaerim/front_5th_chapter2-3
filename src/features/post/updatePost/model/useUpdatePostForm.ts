@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { Post } from "../../../../entities/post/model"
-import { useUpdatePostQuery } from "../updatePost.api"
+import { useUpdatePostQuery } from "../api/useUpdatePostQuery"
 
 interface UpdatedPost {
   title: string

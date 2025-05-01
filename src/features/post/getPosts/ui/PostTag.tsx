@@ -1,4 +1,4 @@
-import { useSearch } from "../../../search/model/useSearch"
+import { useSearch } from "@features/search"
 
 interface PostTagProps {
   tag: string
