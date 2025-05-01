@@ -12,7 +12,7 @@ interface UpdatePostFormProps {
 export const useUpdatePostQuery = ({ close }: UpdatePostFormProps) => {
   const queryClient = useQueryClient()
 
-  const { sortBy, sortOrder, tag, title } = useSearch()
+  const { sortBy, sortOrder, tag, search } = useSearch()
   const { limit, skip } = usePagination()
 
   const { mutate: updatePostMutation } = useMutation({
@@ -20,7 +20,7 @@ export const useUpdatePostQuery = ({ close }: UpdatePostFormProps) => {
     onSuccess: (updatedPost: Post) => {
       // ["posts"] 캐시를 꺼내서, 해당 id에 맞는 항목만 교체
       queryClient.setQueryData<PostListResponse>(
-        QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder),
+        QUERY_KEYS.GET_POST(tag, search, limit, skip, sortBy, sortOrder),
         (old) => {
           if (!old) {
             return {

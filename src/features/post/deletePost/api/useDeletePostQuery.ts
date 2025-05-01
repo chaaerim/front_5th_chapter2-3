@@ -6,7 +6,7 @@ import { QUERY_KEYS } from "@features/post/config/queryKeys"
 export const useDeletePostQuery = () => {
   const queryClient = useQueryClient()
 
-  const { sortBy, sortOrder, tag, title } = useSearch()
+  const { sortBy, sortOrder, tag, search } = useSearch()
   const { limit, skip } = usePagination()
 
   const { mutate: deletePostMutation } = useMutation({
@@ -14,7 +14,7 @@ export const useDeletePostQuery = () => {
     onSuccess: (deleted: DeletePostResponse) => {
       // ["posts"] 캐시를 꺼내서, 삭제된 ID를 제외한 새 배열과 total-1 로 업데이트
       queryClient.setQueryData<PostListResponse>(
-        QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder),
+        QUERY_KEYS.GET_POST(tag, search, limit, skip, sortBy, sortOrder),
         (old) => {
           if (!old) {
             return {

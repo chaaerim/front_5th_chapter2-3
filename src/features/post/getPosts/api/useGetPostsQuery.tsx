@@ -15,7 +15,7 @@ export const useGetPostsQuery = () => {
       } else if (search) {
         return await getPostsBySearch(search)
       }
-      return await getPosts(limit, skip, search)
+      return await getPosts(limit, skip)
     },
   })
 
