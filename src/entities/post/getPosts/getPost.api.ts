@@ -1,7 +1,7 @@
 import { http } from "@shared/api"
 import { PostListResponse } from "@entities/post/model/post"
 
-export const getPosts = async (limit: number, skip: number, search: string) => {
+export const getPosts = async (limit: number, skip: number) => {
   const searchParams = new URLSearchParams()
 
   searchParams.set("limit", limit.toString())
