@@ -8,14 +8,13 @@ import { GetPostDetailButton } from "./GetPostDetailButton"
 import { useFormContext } from "react-hook-form"
 import { SearchBarForm } from "../../../search/model/useSearchBarForm"
 import { Pagination } from "./Pagination"
+import { PostTag } from "./PostTag"
 
 export const PostTable = () => {
   const { watch } = useFormContext<SearchBarForm>()
-
   const searchQuery = watch("title")
 
   const { posts } = useGetPostQuery()
-  console.log("posts", posts)
 
   return (
     <>
@@ -33,39 +32,18 @@ export const PostTable = () => {
           {posts.posts.map((post) => (
             <TableRow key={post.id}>
               <TableCell>{post.id}</TableCell>
-              {/* tag 관련된 cell */}
               <TableCell>
                 <div className="space-y-1">
                   <div>
                     <HighlightText text={post.title} highlight={searchQuery} />
                   </div>
-
-                  {/* <div className="flex flex-wrap gap-1">
-                  {post.tags?.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`px-1 text-[9px] font-semibold rounded-[4px] cursor-pointer ${
-                        selectedTag === tag
-                          ? "text-white bg-blue-500 hover:bg-blue-600"
-                          : "text-blue-800 bg-blue-100 hover:bg-blue-200"
-                      }`}
-                      onClick={() => {
-                        setSelectedTag(tag)
-                        updateURL()
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div> */}
+                  <div className="flex flex-wrap gap-1">{post.tags?.map((tag) => <PostTag key={tag} tag={tag} />)}</div>
                 </div>
               </TableCell>
               <TableCell>
-                {/* 작성자 버튼 */}
                 <UserCell userId={post.userId} />
               </TableCell>
               <TableCell>
-                {/* 반응 버튼 */}
                 <div className="flex items-center gap-2">
                   <ThumbsUp className="w-4 h-4" />
                   <span>{post.reactions?.likes || 0}</span>
