@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { DeleteCommentResponse } from "../../../entities/comment/deleteComment/deleteComment.model"
 import { CommentList } from "../../../entities/comment/getComment/getComment.model"
 import { deleteComment } from "../../../entities/comment/deleteComment/deleteComment.api"
+import { QUERY_KEYS } from "../config/queryKeys"
 
 export const useDeleteCommentQuery = () => {
   const queryClient = useQueryClient()
@@ -10,7 +11,7 @@ export const useDeleteCommentQuery = () => {
     mutationFn: async (commentId: number) => await deleteComment(commentId),
     onSuccess: (deleted: DeleteCommentResponse) => {
       // postId를 키에 포함해서 해당 댓글 리스트만 갱신
-      const key = ["comments", deleted.postId] as const
+      const key = QUERY_KEYS.GET_COMMENT(deleted.postId)
 
       queryClient.setQueryData<CommentList>(key, (old) => {
         if (!old) {

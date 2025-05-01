@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { likeComment } from "../../../entities/comment/likeComment/likeComment.api"
 import { LikeCommentResponse } from "../../../entities/comment/likeComment/likeComment.model"
 import { CommentList } from "../../../entities/comment/getComment/getComment.model"
+import { QUERY_KEYS } from "../config/queryKeys"
 
 export const useLikeCommentQuery = () => {
   const queryClient = useQueryClient()
@@ -9,7 +10,7 @@ export const useLikeCommentQuery = () => {
     mutationFn: async ({ commentId, likes }: { commentId: number; likes: number }) =>
       await likeComment(commentId, likes + 1),
     onSuccess: (liked: LikeCommentResponse) => {
-      const key = ["comments", liked.postId] as const
+      const key = QUERY_KEYS.GET_COMMENT(liked.postId)
 
       queryClient.setQueryData<CommentList>(key, (old) => {
         if (!old) {

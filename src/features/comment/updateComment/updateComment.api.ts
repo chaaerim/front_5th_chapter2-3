@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updateComment } from "../../../entities/comment/updateComment/updateComment.api"
 import { CommentList } from "../../../entities/comment/getComment/getComment.model"
 import { CommentResponse } from "../../../entities/comment/model/commentResponse"
+import { QUERY_KEYS } from "../config/queryKeys"
 
 interface UpdateComment {
   id: number
@@ -14,7 +15,7 @@ export const useUpdateCommentQuery = (close: () => void) => {
   const { mutate: updateCommentMutation } = useMutation({
     mutationFn: async (comment: UpdateComment) => await updateComment(comment),
     onSuccess: (updated: CommentResponse) => {
-      const key = ["comments", updated.postId] as const
+      const key = QUERY_KEYS.GET_COMMENT(updated.postId)
 
       const updatedComment = { ...updated, likes: 0 }
 

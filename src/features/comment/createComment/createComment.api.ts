@@ -3,6 +3,7 @@ import { CreateComment } from "../../../entities/comment/createComment/createCom
 import { createComment } from "../../../entities/comment/createComment/createComment.api"
 import { CommentResponse } from "../../../entities/comment/model/commentResponse"
 import { CommentList } from "../../../entities/comment/getComment/getComment.model"
+import { QUERY_KEYS } from "../config/queryKeys"
 
 export const useCreateCommentQuery = (close: () => void) => {
   const queryClient = useQueryClient()
@@ -10,7 +11,7 @@ export const useCreateCommentQuery = (close: () => void) => {
   const { mutate: createCommentMutation } = useMutation({
     mutationFn: async (comment: CreateComment) => await createComment(comment),
     onSuccess: (createdComment: CommentResponse) => {
-      const key = ["comments", createdComment.postId] as const
+      const key = QUERY_KEYS.GET_COMMENT(createdComment.postId)
 
       const newComment = {
         ...createdComment,
