@@ -8,7 +8,7 @@ interface CreatePostFormProps {
 
 export const CreatePostForm = ({ isOpen, close }: CreatePostFormProps) => {
   // 게시물 추가
-  const { register, onSubmit } = useCreatePostForm()
+  const { register, onSubmit } = useCreatePostForm({ close })
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>

@@ -1,9 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createPost, CreatePostResponse, NewPost } from "../../../entities/post/createPost"
 import { PostList } from "../../../entities/post/model"
+import { useSearch } from "../../search/model/useSearch"
+import { usePagination } from "../getPost/model/usePagination"
+import { QUERY_KEYS } from "../config/queryKeys"
 
-export const useCreatePostQuery = () => {
+export const useCreatePostQuery = (close: () => void) => {
   const queryClient = useQueryClient()
+  const { sortBy, sortOrder, tag, title } = useSearch()
+  const { limit, skip } = usePagination()
 
   const { mutate: createPostMutation } = useMutation({
     mutationFn: async (newPost: NewPost) => await createPost(newPost),
@@ -18,7 +23,7 @@ export const useCreatePostQuery = () => {
         tags: [],
       }
       // 기존 ["posts"] 캐시를 꺼내서, 새로운 Post를 맨 앞에 추가하고 total을 +1
-      queryClient.setQueryData<PostList>(["posts"], (old) => {
+      queryClient.setQueryData<PostList>(QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder), (old) => {
         if (!old) {
           return {
             posts: [newPost],
@@ -34,6 +39,7 @@ export const useCreatePostQuery = () => {
           limit: old.limit,
         }
       })
+      close()
     },
     onError: (error) => {
       console.error(error)
