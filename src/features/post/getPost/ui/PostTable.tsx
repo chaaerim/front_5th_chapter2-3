@@ -7,6 +7,7 @@ import { UserCell } from "../../../user/ui/UserCell"
 import { GetPostDetailButton } from "./GetPostDetailButton"
 import { useFormContext } from "react-hook-form"
 import { SearchBarForm } from "../../../search/model/useSearchBarForm"
+import { Pagination } from "./Pagination"
 
 export const PostTable = () => {
   const { watch } = useFormContext<SearchBarForm>()
@@ -17,28 +18,29 @@ export const PostTable = () => {
   console.log("posts", posts)
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[50px]">ID</TableHead>
-          <TableHead>제목</TableHead>
-          <TableHead className="w-[150px]">작성자</TableHead>
-          <TableHead className="w-[150px]">반응</TableHead>
-          <TableHead className="w-[150px]">작업</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {posts.posts.map((post) => (
-          <TableRow key={post.id}>
-            <TableCell>{post.id}</TableCell>
-            {/* tag 관련된 cell */}
-            <TableCell>
-              <div className="space-y-1">
-                <div>
-                  <HighlightText text={post.title} highlight={searchQuery} />
-                </div>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[50px]">ID</TableHead>
+            <TableHead>제목</TableHead>
+            <TableHead className="w-[150px]">작성자</TableHead>
+            <TableHead className="w-[150px]">반응</TableHead>
+            <TableHead className="w-[150px]">작업</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {posts.posts.map((post) => (
+            <TableRow key={post.id}>
+              <TableCell>{post.id}</TableCell>
+              {/* tag 관련된 cell */}
+              <TableCell>
+                <div className="space-y-1">
+                  <div>
+                    <HighlightText text={post.title} highlight={searchQuery} />
+                  </div>
 
-                {/* <div className="flex flex-wrap gap-1">
+                  {/* <div className="flex flex-wrap gap-1">
                   {post.tags?.map((tag) => (
                     <span
                       key={tag}
@@ -56,31 +58,33 @@ export const PostTable = () => {
                     </span>
                   ))}
                 </div> */}
-              </div>
-            </TableCell>
-            <TableCell>
-              {/* 작성자 버튼 */}
-              <UserCell userId={post.author?.id} />
-            </TableCell>
-            <TableCell>
-              {/* 반응 버튼 */}
-              <div className="flex items-center gap-2">
-                <ThumbsUp className="w-4 h-4" />
-                <span>{post.reactions?.likes || 0}</span>
-                <ThumbsDown className="w-4 h-4" />
-                <span>{post.reactions?.dislikes || 0}</span>
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex items-center gap-2">
-                <GetPostDetailButton post={post} searchQuery={searchQuery} />
-                <UpdatePostButton selectedPost={post} />
-                <DeletePostButton postId={post.id} />
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+                </div>
+              </TableCell>
+              <TableCell>
+                {/* 작성자 버튼 */}
+                <UserCell userId={post.author?.id} />
+              </TableCell>
+              <TableCell>
+                {/* 반응 버튼 */}
+                <div className="flex items-center gap-2">
+                  <ThumbsUp className="w-4 h-4" />
+                  <span>{post.reactions?.likes || 0}</span>
+                  <ThumbsDown className="w-4 h-4" />
+                  <span>{post.reactions?.dislikes || 0}</span>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <GetPostDetailButton post={post} searchQuery={searchQuery} />
+                  <UpdatePostButton selectedPost={post} />
+                  <DeletePostButton postId={post.id} />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Pagination total={posts.total} />
+    </>
   )
 }

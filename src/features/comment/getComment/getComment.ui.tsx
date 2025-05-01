@@ -13,8 +13,6 @@ interface CommentListProps {
 export const CommentList = ({ postId, searchQuery }: CommentListProps) => {
   const { comments } = useGetCommentsQuery(postId)
 
-  console.log(comments.comments[0].body)
-
   return (
     <div className="mt-2">
       <div className="flex items-center justify-between mb-2">
