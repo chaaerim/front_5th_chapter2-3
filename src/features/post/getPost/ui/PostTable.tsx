@@ -1,8 +1,10 @@
-import { MessageSquare, ThumbsDown, ThumbsUp } from "lucide-react"
-import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/ui"
-import { useGetPostQuery } from "./getPost.api"
-import { DeletePostButton } from "../deletePost/deletePost.ui"
-import { UpdatePostButton } from "../updatePost/ui/UpdatePostButton"
+import { ThumbsDown, ThumbsUp } from "lucide-react"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../shared/ui"
+import { useGetPostQuery } from "../getPost.api"
+import { DeletePostButton } from "../../../post/deletePost/deletePost.ui"
+import { UpdatePostButton } from "../../../post/updatePost/ui/UpdatePostButton"
+import { UserCell } from "../../../user/ui/UserCell"
+import { GetPostDetailButton } from "./GetPostDetailButton"
 
 export const PostTable = () => {
   const highlightText = (text: string, highlight: string) => {
@@ -34,7 +36,7 @@ export const PostTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {posts.map((post) => (
+        {posts.posts.map((post) => (
           <TableRow key={post.id}>
             <TableCell>{post.id}</TableCell>
             {/* tag 관련된 cell */}
@@ -64,10 +66,7 @@ export const PostTable = () => {
             </TableCell>
             <TableCell>
               {/* 작성자 버튼 */}
-              <div className="flex items-center space-x-2 cursor-pointer" onClick={() => openUserModal(post.author)}>
-                <img src={post.author?.image} alt={post.author?.username} className="w-8 h-8 rounded-full" />
-                <span>{post.author?.username}</span>
-              </div>
+              <UserCell userId={post.author?.id} />
             </TableCell>
             <TableCell>
               {/* 반응 버튼 */}
@@ -80,11 +79,7 @@ export const PostTable = () => {
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
-                {/* 댓글 버튼 */}
-                <Button variant="ghost" size="sm" onClick={() => openPostDetail(post)}>
-                  <MessageSquare className="w-4 h-4" />
-                </Button>
-                {/* 수정 버튼 */}
+                <GetPostDetailButton post={post} />
                 <UpdatePostButton selectedPost={post} />
                 <DeletePostButton postId={post.id} />
               </div>

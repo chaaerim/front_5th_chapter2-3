@@ -23,16 +23,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Textarea,
 } from "../shared/ui"
 import { CreatePostForm } from "../features/post/createPost/createPost.ui"
 import { overlay } from "overlay-kit"
 import { UpdatePostForm } from "../features/post/updatePost/ui/UpdatePostForm"
-import { UserModal } from "../features/user/ui/UserModal"
 import { UserCell } from "../features/user/ui/UserCell"
-import { UpdateCommentButton } from "../features/comment/updateComment/ui/UpdateCommentButton"
-import { CreateCommentButton } from "../features/comment/createComment/ui"
+
 import { CommentList } from "../features/comment/getComment/getComment.ui"
+import { CreatePostFormButton } from "../features/post/createPost/ui/CreatePostFormButton"
 const PostsManager = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -52,10 +50,6 @@ const PostsManager = () => {
   const [tags, setTags] = useState([])
   const [selectedTag, setSelectedTag] = useState(queryParams.get("tag") || "")
   const [comments, setComments] = useState({})
-  const [selectedComment, setSelectedComment] = useState(null)
-  const [newComment, setNewComment] = useState({ body: "", postId: null, userId: 1 })
-  const [showAddCommentDialog, setShowAddCommentDialog] = useState(false)
-  const [showEditCommentDialog, setShowEditCommentDialog] = useState(false)
   const [showPostDetailDialog, setShowPostDetailDialog] = useState(false)
 
   // URL 업데이트 함수
@@ -185,40 +179,7 @@ const PostsManager = () => {
 
   // 댓글 업데이트
 
-  // 댓글 삭제
-  const deleteComment = async (id, postId) => {
-    try {
-      await fetch(`/api/comments/${id}`, {
-        method: "DELETE",
-      })
-      setComments((prev) => ({
-        ...prev,
-        [postId]: prev[postId].filter((comment) => comment.id !== id),
-      }))
-    } catch (error) {
-      console.error("댓글 삭제 오류:", error)
-    }
-  }
-
   // 댓글 좋아요
-  const likeComment = async (id, postId) => {
-    try {
-      const response = await fetch(`/api/comments/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ likes: comments[postId].find((c) => c.id === id).likes + 1 }),
-      })
-      const data = await response.json()
-      setComments((prev) => ({
-        ...prev,
-        [postId]: prev[postId].map((comment) =>
-          comment.id === data.id ? { ...data, likes: comment.likes + 1 } : comment,
-        ),
-      }))
-    } catch (error) {
-      console.error("댓글 좋아요 오류:", error)
-    }
-  }
 
   // 게시물 상세 보기
   const openPostDetail = (post) => {
@@ -347,51 +308,12 @@ const PostsManager = () => {
     </Table>
   )
 
-  // 댓글 렌더링
-  const renderComments = (postId) => (
-    <div className="mt-2">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-semibold">댓글</h3>
-        <CreateCommentButton postId={postId} userId={1} />
-      </div>
-      <div className="space-y-1">
-        {comments[postId]?.map((comment) => (
-          <div key={comment.id} className="flex items-center justify-between text-sm border-b pb-1">
-            <div className="flex items-center space-x-2 overflow-hidden">
-              <span className="font-medium truncate">{comment.user.username}:</span>
-              <span className="truncate">{highlightText(comment.body, searchQuery)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Button variant="ghost" size="sm" onClick={() => likeComment(comment.id, postId)}>
-                <ThumbsUp className="w-3 h-3" />
-                <span className="ml-1 text-xs">{comment.likes}</span>
-              </Button>
-              <UpdateCommentButton commentId={comment.id} commentBody={comment.body} />
-              <Button variant="ghost" size="sm" onClick={() => deleteComment(comment.id, postId)}>
-                <Trash2 className="w-3 h-3" />
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
   return (
     <Card className="w-full max-w-6xl mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>게시물 관리자</span>
-          <Button
-            onClick={() => {
-              overlay.open(({ isOpen, close }) => {
-                return <CreatePostForm isOpen={isOpen} close={close} />
-              })
-            }}
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            게시물 추가
-          </Button>
+          <CreatePostFormButton />
         </CardTitle>
       </CardHeader>
       <CardContent>
