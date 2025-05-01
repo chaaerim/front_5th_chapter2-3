@@ -5,8 +5,14 @@ import { DeletePostButton } from "../../../post/deletePost/deletePost.ui"
 import { UpdatePostButton } from "../../../post/updatePost/ui/UpdatePostButton"
 import { UserCell } from "../../../user/ui/UserCell"
 import { GetPostDetailButton } from "./GetPostDetailButton"
+import { useFormContext } from "react-hook-form"
+import { SearchBarForm } from "../../../search/model/useSearchBarForm"
 
 export const PostTable = () => {
+  const { watch } = useFormContext<SearchBarForm>()
+
+  const searchQuery = watch("title")
+
   const highlightText = (text: string, highlight: string) => {
     if (!text) return null
     if (!highlight.trim()) {
@@ -44,7 +50,7 @@ export const PostTable = () => {
               <div className="space-y-1">
                 <div>{highlightText(post.title, searchQuery)}</div>
 
-                <div className="flex flex-wrap gap-1">
+                {/* <div className="flex flex-wrap gap-1">
                   {post.tags?.map((tag) => (
                     <span
                       key={tag}
@@ -61,7 +67,7 @@ export const PostTable = () => {
                       {tag}
                     </span>
                   ))}
-                </div>
+                </div> */}
               </div>
             </TableCell>
             <TableCell>

@@ -3,8 +3,12 @@ import { Input } from "../../../shared/ui"
 import { TagSelector } from "./TagSelector"
 import { OrderSelector } from "./OrderSelector"
 import { SortSelector } from "./SortSelector"
+import { useFormContext } from "react-hook-form"
+import { SearchBarForm } from "../model/useSearchBarForm"
 
 export const SearchBar = () => {
+  const { register } = useFormContext<SearchBarForm>()
+
   return (
     <div className="flex gap-4">
       <div className="flex-1">
@@ -13,9 +17,10 @@ export const SearchBar = () => {
           <Input
             placeholder="게시물 검색..."
             className="pl-8"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && searchPosts()}
+            {...register("title")}
+            // value={searchQuery}
+            // onChange={(e) => setSearchQuery(e.target.value)}
+            // onKeyPress={(e) => e.key === "Enter" && searchPosts()}
           />
         </div>
       </div>

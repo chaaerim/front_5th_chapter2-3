@@ -1,8 +1,12 @@
+import { FormProvider } from "react-hook-form"
 import { CreatePostFormButton } from "../../../features/post/createPost/ui/CreatePostFormButton"
 import { PostTable } from "../../../features/post/getPost/ui/PostTable"
+import { useSearchBarForm } from "../../../features/search/model/useSearchBarForm"
 import { SearchBar } from "../../../features/search/ui/SearchBar"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../shared/ui"
 export const PostDashboard = () => {
+  const method = useSearchBarForm()
+
   return (
     <Card className="w-full max-w-6xl mx-auto">
       <CardHeader>
@@ -12,8 +16,10 @@ export const PostDashboard = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <SearchBar />
-        <PostTable />
+        <FormProvider {...method}>
+          <SearchBar />
+          <PostTable />
+        </FormProvider>
       </CardContent>
     </Card>
   )

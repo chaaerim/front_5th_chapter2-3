@@ -1,17 +1,26 @@
+import { useFormContext } from "react-hook-form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../shared/ui"
 import { useGetTagQuery } from "../api/useGetTagQuery"
+import { SearchBarForm } from "../model/useSearchBarForm"
+import { useSearch } from "../model/useSearch"
 
 export const TagSelector = () => {
   const { tags } = useGetTagQuery()
+  const { register, setValue } = useFormContext<SearchBarForm>()
+  const { tag, setTag } = useSearch()
+
+  const handleTagChange = (value: string) => {
+    setTag(value)
+    setValue("tag", value)
+  }
 
   return (
     <Select
-      value={selectedTag}
+      value={tag}
       onValueChange={(value) => {
-        setSelectedTag(value)
-        fetchPostsByTag(value)
-        updateURL()
+        handleTagChange(value)
       }}
+      {...register("tag")}
     >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="태그 선택" />
