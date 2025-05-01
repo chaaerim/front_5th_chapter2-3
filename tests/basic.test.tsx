@@ -3,11 +3,13 @@ import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { http, HttpResponse } from "msw"
 import { setupServer } from "msw/node"
-import { MemoryRouter } from "react-router-dom"
-import PostsManager from "../src/pages/PostsManagerPage"
+import { BrowserRouter, MemoryRouter } from "react-router-dom"
+import PostsManager from "../src/pages/PostsManager"
 import * as React from "react"
 import "@testing-library/jest-dom"
 import { TEST_POSTS, TEST_SEARCH_POST, TEST_USERS } from "./mockData"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { OverlayProvider } from "overlay-kit"
 
 // MSW 서버 설정
 const server = setupServer(
@@ -45,9 +47,24 @@ afterAll(() => server.close())
 
 // 테스트에 공통으로 사용될 render 함수
 const renderPostsManager = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        staleTime: Infinity,
+      },
+    },
+  })
   return render(
     <MemoryRouter>
-      <PostsManager />
+      <QueryClientProvider client={queryClient}>
+        <OverlayProvider>
+          <PostsManager />
+        </OverlayProvider>
+      </QueryClientProvider>
     </MemoryRouter>,
   )
 }
@@ -58,7 +75,7 @@ describe("PostsManager", () => {
     renderPostsManager()
 
     // 로딩 상태 확인 (선택적)
-    expect(screen.getByText(/로딩 중.../i)).toBeInTheDocument()
+    expect(await screen.findByText(/로딩 중.../i)).toBeInTheDocument()
 
     // 게시물이 로드되었는지 확인
     await waitFor(() => {
@@ -111,10 +128,11 @@ describe("PostsManager", () => {
     })
 
     const addButton = screen.getByRole("button", { name: /게시물 추가/i })
+
     await user.click(addButton)
 
-    const titleInput = screen.getByPlaceholderText(/제목/i)
-    const bodyInput = screen.getByPlaceholderText(/내용/i)
+    const titleInput = await screen.findByPlaceholderText(/제목/i)
+    const bodyInput = await screen.findByPlaceholderText(/내용/i)
     await user.type(titleInput, NEW_POST.title)
     await user.type(bodyInput, NEW_POST.body)
 

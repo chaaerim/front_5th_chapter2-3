@@ -9,11 +9,11 @@ import { useSearch } from "@features/search/model/useSearch"
 
 export const SearchBar = () => {
   const { register } = useFormContext<SearchBarForm>()
-  const { setTitle } = useSearch()
+  const { setSearch } = useSearch()
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setTitle(e.currentTarget.value)
+      setSearch(e.currentTarget.value)
     }
   }
 

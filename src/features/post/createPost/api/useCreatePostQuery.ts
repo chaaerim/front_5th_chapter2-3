@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@features/post/config/queryKeys"
 
 export const useCreatePostQuery = (close: () => void) => {
   const queryClient = useQueryClient()
-  const { sortBy, sortOrder, tag, title } = useSearch()
+  const { sortBy, sortOrder, tag, search } = useSearch()
   const { limit, skip } = usePagination()
 
   const { mutate: createPostMutation } = useMutation({
@@ -22,7 +22,7 @@ export const useCreatePostQuery = (close: () => void) => {
       }
       // 기존 ["posts"] 캐시를 꺼내서, 새로운 Post를 맨 앞에 추가하고 total을 +1
       queryClient.setQueryData<PostListResponse>(
-        QUERY_KEYS.GET_POST(tag, title, limit, skip, sortBy, sortOrder),
+        QUERY_KEYS.GET_POST(tag, search, limit, skip, sortBy, sortOrder),
         (old) => {
           if (!old) {
             return {

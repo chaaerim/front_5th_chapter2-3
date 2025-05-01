@@ -6,7 +6,7 @@ export const useSearch = () => {
   const sortBy = searchParams.get("sortBy") || ""
   const sortOrder = searchParams.get("sortOrder") || ""
   const tag = searchParams.get("tag") || ""
-  const title = searchParams.get("title") || ""
+  const search = searchParams.get("search") || ""
 
   const setSortBy = (sortBy: string) => {
     setSearchParams((prev) => {
@@ -29,12 +29,12 @@ export const useSearch = () => {
     })
   }
 
-  const setTitle = (title: string) => {
+  const setSearch = (search: string) => {
     setSearchParams((prev) => {
-      prev.set("title", title)
+      prev.set("search", search)
       return prev
     })
   }
 
-  return { sortBy, sortOrder, tag, title, setSortBy, setSortOrder, setTag, setTitle }
+  return { sortBy, sortOrder, tag, search, setSortBy, setSortOrder, setTag, setSearch }
 }
