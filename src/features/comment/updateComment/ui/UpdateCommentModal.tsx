@@ -1,4 +1,4 @@
-import { Button, Textarea, Dialog, DialogContent, DialogHeader, DialogTitle } from "@shared/ui"
+import { Button, Textarea, Dialog } from "@shared/ui"
 import { useUpdateCommentForm } from "@features/comment/updateComment/model/useUpdateCommentForm"
 
 interface UpdateCommentFormProps {
