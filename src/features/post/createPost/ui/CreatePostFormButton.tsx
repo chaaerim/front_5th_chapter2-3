@@ -1,6 +1,6 @@
 import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { CreatePostForm } from "@features/post/createPost/ui/CreatePostForm"
+import { CreatePostModal } from "@features/post/createPost/ui/CreatePostModal"
 import { Plus } from "lucide-react"
 
 export const CreatePostFormButton = () => {
@@ -8,7 +8,7 @@ export const CreatePostFormButton = () => {
     <Button
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <CreatePostForm isOpen={isOpen} close={close} />
+          return <CreatePostModal isOpen={isOpen} close={close} />
         })
       }}
     >

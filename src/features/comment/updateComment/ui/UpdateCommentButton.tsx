@@ -1,6 +1,6 @@
 import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { UpdateCommentForm } from "@features/comment/updateComment/ui/UpdateCommentForm"
+import { UpdateCommentModal } from "@features/comment/updateComment/ui/UpdateCommentModal"
 import { Edit2 } from "lucide-react"
 
 interface UpdateCommentButtonProps {
@@ -15,7 +15,7 @@ export const UpdateCommentButton = ({ commentId, commentBody }: UpdateCommentBut
       size="sm"
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <UpdateCommentForm isOpen={isOpen} close={close} commentId={commentId} commentBody={commentBody} />
+          return <UpdateCommentModal isOpen={isOpen} close={close} commentId={commentId} commentBody={commentBody} />
         })
       }}
     >

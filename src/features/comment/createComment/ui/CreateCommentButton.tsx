@@ -1,5 +1,5 @@
 import { overlay } from "overlay-kit"
-import { CreateCommentForm } from "@features/comment/createComment/ui/CreateCommentForm"
+import { CreateCommentModal } from "@features/comment/createComment/ui/CreateCommentModal"
 import { Plus } from "lucide-react"
 import { Button } from "@shared/ui"
 
@@ -14,7 +14,7 @@ export const CreateCommentButton = ({ postId, userId }: CreateCommentButtonProps
       size="sm"
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <CreateCommentForm isOpen={isOpen} close={close} postId={postId} userId={userId} />
+          return <CreateCommentModal isOpen={isOpen} close={close} postId={postId} userId={userId} />
         })
       }}
     >

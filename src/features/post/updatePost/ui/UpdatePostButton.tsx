@@ -1,6 +1,6 @@
 import { Button } from "@shared/ui"
 import { overlay } from "overlay-kit"
-import { UpdatePostForm } from "@features/post/updatePost/ui/UpdatePostForm"
+import { UpdatePostModal } from "@features/post/updatePost/ui/UpdatePostModal"
 import { Edit2 } from "lucide-react"
 import { Post } from "@entities/post"
 
@@ -15,7 +15,7 @@ export const UpdatePostButton = ({ selectedPost }: UpdatePostButtonProps) => {
       size="sm"
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <UpdatePostForm isOpen={isOpen} close={close} selectedPost={selectedPost} />
+          return <UpdatePostModal isOpen={isOpen} close={close} selectedPost={selectedPost} />
         })
       }}
     >

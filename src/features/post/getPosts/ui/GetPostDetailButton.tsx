@@ -1,6 +1,6 @@
 import { MessageSquare } from "lucide-react"
 import { Button } from "@shared/ui"
-import { PostDetail } from "@features/post/getPosts/ui/PostDetail"
+import { PostDetailModal } from "@features/post/getPosts/ui/PostDetailModal"
 import { overlay } from "overlay-kit"
 import { Post } from "@entities/post"
 
@@ -16,7 +16,7 @@ export const GetPostDetailButton = ({ post, searchQuery }: GetPostDetailButtonPr
       size="sm"
       onClick={() => {
         overlay.open(({ isOpen, close }) => {
-          return <PostDetail isOpen={isOpen} close={close} selectedPost={post} searchQuery={searchQuery} />
+          return <PostDetailModal isOpen={isOpen} close={close} selectedPost={post} searchQuery={searchQuery} />
         })
       }}
     >
