@@ -4,6 +4,7 @@ import { PostTable } from "../../../features/post/getPosts/ui/PostTable"
 import { useSearchBarForm } from "../../../features/search/model/useSearchBarForm"
 import { SearchBar } from "../../../features/search/ui/SearchBar"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../shared/ui"
+import { Suspense } from "react"
 export const PostDashboard = () => {
   const method = useSearchBarForm()
 
@@ -18,7 +19,9 @@ export const PostDashboard = () => {
       <CardContent>
         <FormProvider {...method}>
           <SearchBar />
-          <PostTable />
+          <Suspense fallback={<div>Loading...</div>}>
+            <PostTable />
+          </Suspense>
         </FormProvider>
       </CardContent>
     </Card>
